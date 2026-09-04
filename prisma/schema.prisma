@@ -1,13 +1,42 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
-generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
-}
+// Propósito del archivo:
+// Definir el modelo de datos relacional del proyecto compatible con Prisma v6.
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum RolUsuarioEnum {
+  USUARIO_ESTANDAR
+  ADMINISTRADOR
+}
+
+model PerfilUsuario {
+  idPerfilUsuario     String          @id @default(uuid())
+  idUsuarioSupabase   String          @unique
+  correoElectronico   String          @unique
+  nombreCompleto      String
+  rolUsuario          RolUsuarioEnum  @default(USUARIO_ESTANDAR)
+  fechaCreacion       DateTime        @default(now())
+  fechaActualizacion DateTime        @updatedAt
+  listaProyectos      Proyecto[]
+
+  @@map("perfiles_usuarios")
+}
+
+model Proyecto {
+  idProyecto           String        @id @default(uuid())
+  tituloProyecto       String
+  descripcionProyecto String?
+  estaActivo           Boolean       @default(true)
+  idPerfilUsuario     String
+  perfilUsuario       PerfilUsuario @relation(fields: [idPerfilUsuario], references: [idPerfilUsuario], onDelete: Cascade)
+  fechaCreacion       DateTime      @default(now())
+  fechaActualizacion  DateTime      @updatedAt
+
+  @@map("proyectos")
 }
