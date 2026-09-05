@@ -1,1 +1,15 @@
 documentacion/
+node_modules/
+/src/generated/prisma
+
+# Archivos de entorno y credenciales
+.env
+.env*.local
+
+# Configuraciones del IDE y del entorno local
+.windsurf/
+skills-lock.json
+
+# Carpetas de agentes y entorno local
+.agents/
+.claude/
