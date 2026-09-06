@@ -65,7 +65,7 @@ Abre http://localhost:3000 en tu navegador para ver la aplicación.
 ## Arquitectura y Estado Actual
 El proyecto está diseñado sobre Next.js App Router aplicando principios de Clean Code, desarrollo atómico y arquitecturas basadas en capas:
 
-- Capa de Datos (src/lib/):
+#### Capa de Datos (src/lib/):
 
 - Instancia Singleton de Prisma Client (prisma-client.ts).
 
@@ -73,4 +73,12 @@ El proyecto está diseñado sobre Next.js App Router aplicando principios de Cle
 
 - Cliente Supabase para Server Components y Server Actions con gestión de cookies (supabase-server.ts).
 
-- Control de Versiones: Commits atómicos guiados por el estándar Conventional Commits.
+#### Base de datos(prisma/):
+- Esquema relacional con entidades PerfilUsuario y Proyecto.
+
+- Sistema de migraciones controlado (prisma/migrations/).
+
+- Soporte dual para Transaction Pooler y Conexión Directa en Supabase.
+
+#### Control de Versiones: 
+- Commits atómicos guiados por el estándar Conventional Commits.
