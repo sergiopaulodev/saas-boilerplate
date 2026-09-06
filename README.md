@@ -66,13 +66,13 @@ Abre http://localhost:3000 en tu navegador para ver la aplicación.
 ## Arquitectura y Estado Actual
 El proyecto está diseñado sobre Next.js App Router aplicando principios de Clean Code, desarrollo atómico y arquitecturas basadas en capas:
 
-#### Capa de Datos (src/lib/):
+#### Capa de Datos (`src/lib/`):
 
-- Instancia Singleton de Prisma Client (prisma-client.ts).
+- Instancia Singleton de Prisma Client (`prisma-client.ts`).
 
-- Cliente Supabase optimizado para Client Components (supabase-client.ts).
+- Cliente Supabase optimizado para Client Components (`supabase-client.ts`).
 
-- Cliente Supabase para Server Components y Server Actions con gestión de cookies (supabase-server.ts).
+- Cliente Supabase para Server Components y Server Actions con gestión de cookies (`supabase-server.ts`).
 
 #### Base de datos(prisma/):
 - Esquema relacional con entidades `PerfilUsuario` y `Proyecto`.
@@ -81,8 +81,17 @@ El proyecto está diseñado sobre Next.js App Router aplicando principios de Cle
 
 - Soporte dual para Transaction Pooler (`DATABASE_URL`) y Conexión Directa en Supabase (`DIRECT_URL`).
 
-#### Vistas e Interfaz (`src/app/`)
-- Páginas de inicio de sesión (`/login`) y registro (`/registro`) con manejo de estados de carga y validación.
+#### Autenticación y lógica de negocio (`src/actions/`, `src/schemas/`, `src/middleware.ts`)
+- **Contratos de Validación**: Esquemas Zod para credenciales y registro (`src/schemas/auth-schemas.ts`).
+
+- **Server Actions**: Procesamiento de login, registro y logout sincronizando Supabase Auth con el modelo `PerfilUsuario` en Prisma (`src/actions/auth-actions.ts`).
+
+- **Middleware Global**: Refresco automático de tokens de sesión y protección de rutas autenticadas/públicas (`src/middleware.ts`).
+
+#### Vistas, Componentes e Interfaz (`src/app/`, `src/components/`)
+- **Módulo de Autenticación**: páginas de inicio de sesión (`/login`) y registro (`/registro`) con manejo de estados de carga y validación.
+
+- **Scaffolding de Dashboard** (`src/app/(dashboard)/`): Layout protegido (`layout.tsx`), barra superior de usuario (`AppNavbar`), barra de navegación lateral (`AppSidebar`), pantalla de acceso denegado (`src/app/forbidden.tsx`) y vista principal con resumen del usuario (`/dashboard`).
 
 #### Control de Versiones: 
 - Commits atómicos guiados por el estándar Conventional Commits.
