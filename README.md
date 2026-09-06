@@ -74,7 +74,7 @@ El proyecto está diseñado sobre Next.js App Router aplicando principios de Cle
 
 - Cliente Supabase para Server Components y Server Actions con gestión de cookies (`supabase-server.ts`).
 
-#### Base de datos(prisma/):
+#### Base de datos(`prisma/`):
 - Esquema relacional con entidades `PerfilUsuario` y `Proyecto`.
 
 - Sistema de migraciones controlado (`prisma/migrations/`).
@@ -82,9 +82,9 @@ El proyecto está diseñado sobre Next.js App Router aplicando principios de Cle
 - Soporte dual para Transaction Pooler (`DATABASE_URL`) y Conexión Directa en Supabase (`DIRECT_URL`).
 
 #### Autenticación y lógica de negocio (`src/actions/`, `src/schemas/`, `src/middleware.ts`)
-- **Contratos de Validación**: Esquemas Zod para credenciales y registro (`src/schemas/auth-schemas.ts`).
+- **Módulo de Autenticación**: Esquemas Zod (`auth-schemas.ts`) y Server Actions (`auth-actions.ts`) sincronizando Supabase Auth con el perfil en Prisma. .
 
-- **Server Actions**: Procesamiento de login, registro y logout sincronizando Supabase Auth con el modelo `PerfilUsuario` en Prisma (`src/actions/auth-actions.ts`).
+- **Módulo de Proyectos**: Esquema Zod con contratos de validación (`project-schemas.ts`) y Server Actions para operaciones CRUD de lectura, creación y eliminación (`project-actions.ts`).
 
 - **Middleware Global**: Refresco automático de tokens de sesión y protección de rutas autenticadas/públicas (`src/middleware.ts`).
 
