@@ -48,13 +48,14 @@ Configura en tu .env:
 Fragmento de código
 NEXT_PUBLIC_SUPABASE_URL="[https://tu-proyecto.supabase.co](https://tu-proyecto.supabase.co)"
 NEXT_PUBLIC_SUPABASE_ANON_KEY="tu-llave-anonima-publica"
-DATABASE_URL="postgresql://usuario:contrasena@host:5432/nombre_base_datos?schema=public"
+DATABASE_URL="postgresql://usuario:contrasena@host:6543/nombre_base_datos?schema=public&pgbouncer=true"
+DIRECT_URL="postgresql://postgres.id:contrasena@host:5432/postgres?schema=public"
 ```
 
 4. Generar cliente y sincronizar la base de datos con Prisma
 ```Bash
 npx prisma generate
-npx prisma db push
+npx prisma migrate dev
 ```
 5. Iniciar el servidor de desarrollo
 ```Bash
@@ -74,11 +75,14 @@ El proyecto está diseñado sobre Next.js App Router aplicando principios de Cle
 - Cliente Supabase para Server Components y Server Actions con gestión de cookies (supabase-server.ts).
 
 #### Base de datos(prisma/):
-- Esquema relacional con entidades PerfilUsuario y Proyecto.
+- Esquema relacional con entidades `PerfilUsuario` y `Proyecto`.
 
-- Sistema de migraciones controlado (prisma/migrations/).
+- Sistema de migraciones controlado (`prisma/migrations/`).
 
-- Soporte dual para Transaction Pooler y Conexión Directa en Supabase.
+- Soporte dual para Transaction Pooler (`DATABASE_URL`) y Conexión Directa en Supabase (`DIRECT_URL`).
+
+#### Vistas e Interfaz (`src/app/`)
+- Páginas de inicio de sesión (`/login`) y registro (`/registro`) con manejo de estados de carga y validación.
 
 #### Control de Versiones: 
 - Commits atómicos guiados por el estándar Conventional Commits.
