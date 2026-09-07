@@ -13,3 +13,14 @@ skills-lock.json
 # Carpetas de agentes y entorno local
 .agents/
 .claude/
+
+# Depósitos de compilación y temporales
+.next/
+out/
+build/
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
