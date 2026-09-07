@@ -8,8 +8,8 @@ Boilerplate modular para aplicaciones SaaS desarrollado con **Next.js (App Route
 
 - **Framework:** Next.js (App Router)
 - **Lenguaje:** TypeScript (Strict Mode)
-- **Estilos:** Tailwind CSS
-- **Componentes UI:** Shadcn UI (Radix UI)
+- **Estilos:** Tailwind CSS v4 + PostCSS
+- **Componentes UI:** Shadcn UI (Radix UI + Lucide React)
 - **Base de Datos & Auth:** Supabase + PostgreSQL
 - **ORM:** Prisma v6
 - **Validación:** Zod + React Hook Form
@@ -74,6 +74,8 @@ El proyecto está diseñado sobre Next.js App Router aplicando principios de Cle
 
 - Cliente Supabase para Server Components y Server Actions con gestión de cookies (`supabase-server.ts`).
 
+- Helper auxiliar de estilos `cn` fusionando `clsx` y `tailwind-merge` (`utils.ts`).
+
 #### Base de datos(`prisma/`):
 - Esquema relacional con entidades `PerfilUsuario` y `Proyecto`.
 
@@ -89,9 +91,14 @@ El proyecto está diseñado sobre Next.js App Router aplicando principios de Cle
 - **Middleware Global**: Refresco automático de tokens de sesión y protección de rutas autenticadas/públicas (`src/middleware.ts`).
 
 #### Vistas, Componentes e Interfaz (`src/app/`, `src/components/`)
+
+- Layout Raíz Global (`src/app/layout.tsx`): Estructura HTML global con carga de estilos Tailwind CSS v4 (`globals.css`).
+
 - **Módulo de Autenticación**: páginas de inicio de sesión (`/login`) y registro (`/registro`) con manejo de estados de carga y validación.
 
 - **Scaffolding de Dashboard** (`src/app/(dashboard)/`): Layout protegido (`layout.tsx`), barra superior de usuario (`AppNavbar`), barra de navegación lateral (`AppSidebar`), pantalla de acceso denegado (`src/app/forbidden.tsx`) y vista principal con resumen del usuario (`/dashboard`).
+
+- **Módulo de Proyectos UI (`/proyectos`)**: Interfaz funcional construida con componentes atómicos de Shadcn UI (`button`, `dialog`, `input`, `textarea`, `label`), tabla de proyectos con confirmación de borrado (`project-table.tsx`) y modal de creación (`project-modal.tsx`).
 
 #### Control de Versiones: 
 - Commits atómicos guiados por el estándar Conventional Commits.
