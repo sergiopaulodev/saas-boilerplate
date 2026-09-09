@@ -84,7 +84,9 @@ El proyecto está diseñado sobre Next.js App Router aplicando principios de Cle
 - Soporte dual para Transaction Pooler (`DATABASE_URL`) y Conexión Directa en Supabase (`DIRECT_URL`).
 
 #### Autenticación y lógica de negocio (`src/actions/`, `src/schemas/`, `src/middleware.ts`)
-- **Módulo de Autenticación**: Esquemas Zod (`auth-schemas.ts`) y Server Actions (`auth-actions.ts`) sincronizando Supabase Auth con el perfil en Prisma. .
+- **Módulo de Autenticación**: Esquemas Zod (`auth-schemas.ts`) y Server Actions (`auth-actions.ts`) sincronizando Supabase Auth con el perfil en Prisma.
+
+- **Módulo de Administración**: Server Actions (`user-actions.ts`) para consulta de usuarios y actualización de roles (`RolUsuarioEnum`) con protección contra autorevocación.
 
 - **Módulo de Proyectos**: Esquema Zod con contratos de validación (`project-schemas.ts`) y Server Actions para operaciones CRUD de lectura, creación y eliminación (`project-actions.ts`).
 
@@ -92,9 +94,11 @@ El proyecto está diseñado sobre Next.js App Router aplicando principios de Cle
 
 #### Vistas, Componentes e Interfaz (`src/app/`, `src/components/`)
 
-- Layout Raíz Global (`src/app/layout.tsx`): Estructura HTML global con carga de estilos Tailwind CSS v4 (`globals.css`).
+- **Layout Raíz Global** (`src/app/layout.tsx`): Estructura HTML global con carga de estilos Tailwind CSS v4 (`globals.css`).
 
 - **Módulo de Autenticación**: páginas de inicio de sesión (`/login`) y registro (`/registro`) con manejo de estados de carga y validación.
+
+- **Módulo de Administración (`/admin`)**: Vista protegida para administradores y tabla interactiva (`user-table.tsx`) con actualización reactiva de roles mediante `useTransition`.
 
 - **Scaffolding de Dashboard** (`src/app/(dashboard)/`): Layout protegido (`layout.tsx`), barra superior de usuario (`AppNavbar`), barra de navegación lateral (`AppSidebar`), pantalla de acceso denegado (`src/app/forbidden.tsx`) y vista principal con resumen del usuario (`/dashboard`).
 
